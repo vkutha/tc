@@ -1,0 +1,3 @@
+For metrics we would integrate the prometheus go client into our microservice
+and we can create our own microservice custom metrics that are scraped by
+prometheus in the cluster.

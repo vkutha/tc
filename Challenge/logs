@@ -1,0 +1,3 @@
+To retrieve logs for microservices we deploy fluentD daemonsets in the cluster. This would make
+a pod on each node and that pod would send the host container logs to the our central location in our case
+ElasticSearch cluster.

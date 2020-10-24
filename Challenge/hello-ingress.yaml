@@ -1,0 +1,21 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    node-role.kubernetes.io/ingress: platform
+  name: hello-ingress
+  namespace: svc-pipeline-tester-stable-test
+  annotations:
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+  - host: ingress-platform.live-aws-useast1.venu.io
+    http:
+      paths:
+      - backend:
+          serviceName: hello-svc
+          servicePort: 3000
+        path: /dev/tc
+status:
+  loadBalancer: {}

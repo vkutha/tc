@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: hello
+  name: hello
+  namespace: svc-pipeline-tester-stable-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hello
+    spec:
+      containers:
+      - image: venudocker/tc:latest
+        name: tc
+        resources:
+          limits:
+            cpu: "0.2"
+            memory: 256Mi
+          requests:
+            cpu: "0.1"
+            memory: 128Mi
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        livenessProbe:
+          httpGet:
+            port: 3000
+            path: /health
+          periodSeconds: 30
+          initialDelaySeconds: 5
+          timeoutSeconds: 20
+        env:
+        - name: MESSAGE
+          value: "CustomHelloWorld"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+      - name: tmp
+        emptyDir: {}
+status: {}

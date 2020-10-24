@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hello
+  name: hello-svc
+  namespace: svc-pipeline-tester-stable-test
+spec:
+  clusterIP: *.*.*.*
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: hello
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
